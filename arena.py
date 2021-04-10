@@ -2,6 +2,9 @@
 
 from controller import Controller
 
+from example_contestants import naiive
+from example_contestants import random
+
 # Begin autogenerate
 from contestants import simple_killer
 from contestants import the_primitive_looker
@@ -25,6 +28,11 @@ contestants = [
     ("The dedicated counter", the_dedicated_counter.strategy, the_dedicated_counter.turn),
 ]
 # End autogenerate
+
+contestants += [
+    ("Naiive", naiive.strategy),
+    ("Random", random.strategy),
+]
 
 # Contestants list has format: name, strategy function, (legacy only) turn function 
 
