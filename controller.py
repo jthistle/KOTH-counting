@@ -1,6 +1,7 @@
 
 class Controller:
-    def __init__(self, funcs_1, funcs_2):
+    def __init__(self, funcs_1, funcs_2, names=None):
+        self.names = names
         self.legacy = [len(x) == 2 for x in (funcs_1, funcs_2)]
         self.strategy = funcs_1[0], funcs_2[0]
         self.turn = funcs_1[1] if self.legacy[0] else None, \
@@ -26,6 +27,12 @@ class Controller:
                     break
             if type(choices[i]) is not int:
                 choices[i] = 100
+
+        # Check for acceptable values
+        for i in range(2):
+            if not 1 <= choices[i] <= 100:
+                name = f"Player {i + 1}" if self.names is None else self.names[i]
+                raise Exception(f"{name} gives unacceptable value {choices[i]}")
 
         # Work out who's won
         if choices[0] == choices[1] == 100:

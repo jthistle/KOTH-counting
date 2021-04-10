@@ -8,4 +8,4 @@ def strategy(last_games):
     if last_games[-1][1]:
         return last_games[-1][0]
     else:
-        return last_games[-1][0] - 1
+        return max(1, last_games[-1][0] - 1)

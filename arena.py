@@ -35,7 +35,7 @@ for i in range(len(contestants)):
         if contestant == opponent:
             continue
 
-        ctrl = Controller(contestant[1:], opponent[1:])
+        ctrl = Controller(contestant[1:], opponent[1:], (contestant[0], opponent[0]))
 
         result = ctrl.run(N_GAMES)
 
@@ -49,7 +49,7 @@ for i in range(len(contestants)):
 
 ordered_score = sorted(zip(contestants, scores), key=lambda x: x[1], reverse=True)
 ordered_wins = sorted(zip(contestants, wins), key=lambda x: x[1], reverse=True)
-ordered_all = sorted(zip(contestants, wins, scores), key=lambda x: [y[0] for y in ordered_score].index(x[0]) + [y[0] for y in ordered_wins].index(x[0]))
+ordered_all = sorted(contestants, key=lambda x: [y[0] for y in ordered_score].index(x) + [y[0] for y in ordered_wins].index(x))
 
 print("By score:")
 for i in range(len(contestants)):
@@ -61,4 +61,4 @@ for i in range(len(contestants)):
 
 print("\nCombined leaderboard:")
 for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_all[i][0][0]}")
+    print(f"{i + 1}: {ordered_all[i][0]}")
