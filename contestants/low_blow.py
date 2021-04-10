@@ -10,11 +10,9 @@ def strategy(last_results):
         if len(scores) > 420 and scores[:3] == [69, 68, 68]:
                 return 67
 
-        constants  = [ 1, 65]
         decrements = [50, 69]
 
-        for constant in constants:
-                if all(score == constant for score in scores): return constant
+        if all(score == 1 for score in scores): return 1
 
         for decrement in decrements:
                 mold = [decrement]
@@ -22,6 +20,11 @@ def strategy(last_results):
                 if scores == mold:
                         return decrement - 1
 
+        if scores[0] == 65:
+                if scores[-1] == 1: return 1
+                return random.randint(1, 48)
+
+        if scores[:2] == [99, 97]    : return max(scores[-1] - 3, 1)
         if len(scores) <= 3          : return 99
         if scores[:3] == [99, 98,  1]: return  1
         if scores[:3] == [99, 99, 98]: return max(scores[-1] - 1, 1)
