@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-from contestants import example_random
-from contestants import example_naiive
+from example_contestants import random
+from example_contestants import naiive
 
 from controller import Controller
 
 ctrl = Controller(
-    [example_random.strategy],
-    [example_naiive.strategy],
+    [random.strategy],
+    [naiive.strategy],
 )
 
 # Run games
