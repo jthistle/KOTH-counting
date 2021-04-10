@@ -6,7 +6,7 @@ from contestants import example_random
 from contestants import example_naiive
 from contestants import dedicated
 from contestants import primitive
-# from contestants import desperate
+from contestants import desperate
 from contestants import shortcut
 from contestants import crab
 from contestants import funny_number
@@ -20,7 +20,7 @@ contestants = [
     ("Shortcut", shortcut.strategy, shortcut.turn),
     ("Crab", crab.strategy, crab.turn),
     ("Funny Number", funny_number.strategy),
-    # ("The Desperate Fighter", desperate.strategy, desperate.turn),
+    ("The Desperate Fighter", desperate.strategy, desperate.turn),
 ]
 
 scores = [0] * len(contestants)
