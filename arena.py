@@ -9,6 +9,7 @@ from contestants import primitive
 # from contestants import desperate
 from contestants import shortcut
 from contestants import crab
+from contestants import funny_number
 
 # Format: name, strategy function, (legacy only) turn function 
 contestants = [
@@ -18,6 +19,7 @@ contestants = [
     ("The Primitive Looker", primitive.strategy, primitive.turn),
     ("Shortcut", shortcut.strategy, shortcut.turn),
     ("Crab", crab.strategy, crab.turn),
+    ("Funny Number", funny_number.strategy),
     # ("The Desperate Fighter", desperate.strategy, desperate.turn),
 ]
 
@@ -47,6 +49,7 @@ for i in range(len(contestants)):
 
 ordered_score = sorted(zip(contestants, scores), key=lambda x: x[1], reverse=True)
 ordered_wins = sorted(zip(contestants, wins), key=lambda x: x[1], reverse=True)
+ordered_all = sorted(zip(contestants, wins, scores), key=lambda x: [y[0] for y in ordered_score].index(x[0]) + [y[0] for y in ordered_wins].index(x[0]))
 
 print("By score:")
 for i in range(len(contestants)):
@@ -55,3 +58,7 @@ for i in range(len(contestants)):
 print("\nBy wins:")
 for i in range(len(contestants)):
     print(f"{i + 1}: {ordered_wins[i][0][0]} with {ordered_wins[i][1]}/{len(contestants) - 1} wins")
+
+print("\nCombined leaderboard:")
+for i in range(len(contestants)):
+    print(f"{i + 1}: {ordered_all[i][0][0]}")
