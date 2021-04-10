@@ -1,4 +1,4 @@
-# Counting - Python 3 KOTH
+# Cooperative Counting - Python 3 KOTH
 
 Have you ever tried to count to 100 in an online forum or comment thread? It normally goes something like:
 
@@ -95,7 +95,13 @@ Each player gets 100 points.
 Your bot will be matched against other bots. It will play some number of rounds in a row, `n`, against the same bot.
 `n` will be somewhere in the range of 100 - 1000. This allows your bot to adapt to the other bot's strategy.
 
-## Round robin
+**To clarify:**
+
+- one **game**, between two bots, is made up of multiple **rounds**
+- one **round** is made up of multiple **turns**. A round starts with the sequence at 1, and ends when a bot stops counting.
+- one **turn** is simply made up of each bot deciding whether to keep counting or not
+
+# Winning the KOTH
 
 Each bot will have a go against each other bot. Your bot can win in two categories:
 
@@ -114,9 +120,11 @@ def turn(current_value: int, *args) -> bool:
     pass
 ```
 
-`strategy` is called once at the beginning of each game. `last_results` is a list of previous results against the same opponent.
+`strategy` is called once at the beginning of each round. `last_results` is a list of previous results against the same opponent.
 Each item in the list is the result of a game in the form `(value reached, won)`, where `won` denotes whether the player
-won or not. If the player won through cooperation, this will be `True`. 
+won or not. If the player won through cooperation, this will be `True`.
+
+e.g.: if you lose your first round because your opponent stops counting at 79, `last_results` looks like `[(79, False)]` at the start of turn 2. If you then win turn 2 by stopping counting at 34, `last_results` will look like `[(79, False), (34, True)]` at the start of turn 3.
 
 `strategy` should return a tuple of static arguments that it wants to be passed to the `turn` function on each turn.
 
@@ -124,6 +132,8 @@ won or not. If the player won through cooperation, this will be `True`.
 returned by the `strategy` function.
 
 `turn` returns a bool: `True` to keep counting, `False` to stop counting.
+
+(The reason that there are two separate functions is to try to speed up overall execution time, so bots don't analyze `last_results` every turn.) 
 
 # Rules
 
@@ -133,7 +143,7 @@ returned by the `strategy` function.
 
 # Controller, sandbox, arena
 
-**The controller is available at https://github.com/jthistle/KOTH-counting.**
+**The controller is available at [https://github.com/jthistle/KOTH-counting](https://github.com/jthistle/KOTH-counting).**
 
 A couple of example bots are provided along with it to demonstrate how to use it.
 
