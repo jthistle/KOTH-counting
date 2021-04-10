@@ -66,7 +66,7 @@ Player 2 gets 60 points, player 1 gets 0 points.
 
 -----
 
-In another game:
+In another round:
 
 ...
 
@@ -79,7 +79,7 @@ Neither player gets points.
 
 -----
 
-In yet another game:
+In yet another round:
 
 ...
 
