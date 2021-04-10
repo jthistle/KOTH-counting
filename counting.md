@@ -130,3 +130,13 @@ returned by the `strategy` function.
 - No cheating by interfering directly with your opponent (through global variables etc.).
 - Your function should be relatively quick to execute - the quicker it is, the better.
 - You *may* submit multiple entries.
+
+# Controller, sandbox, arena
+
+**The controller is available at https://github.com/jthistle/KOTH-counting.**
+
+A couple of example bots are provided along with it to demonstrate how to use it.
+
+`sandbox.py` provides a place to try out your bot against others and debug it.
+
+`arena.py` is what I'll be using to calculate final scores. It pits each bot against each other bot.

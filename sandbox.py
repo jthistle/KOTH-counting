@@ -11,4 +11,4 @@ ctrl = Controller(
 )
 
 # Run games
-ctrl.run(1000, debug=False)
+ctrl.run(1000, debug=True)
