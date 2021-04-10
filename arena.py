@@ -5,11 +5,15 @@ from controller import Controller
 from contestants import example_random
 from contestants import example_naiive
 from contestants import dedicated
+from contestants import primitive
+from contestants import desperate
 
 contestants = [
     ("Random", example_random.strategy, example_random.turn),
     ("Naiive", example_naiive.strategy, example_naiive.turn),
     ("The Dedicated Counter", dedicated.strategy, dedicated.turn),
+    ("The Primitive Looker", primitive.strategy, primitive.turn),
+    # ("The Desperate Fighter", desperate.strategy, desperate.turn),
 ]
 
 scores = [0] * len(contestants)
