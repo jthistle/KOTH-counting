@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import example_random
-import example_naiive
+from contestants import example_random
+from contestants import example_naiive
 
 from controller import Controller
 

@@ -2,13 +2,14 @@
 
 from controller import Controller
 
-import example_random
-import example_naiive
+from contestants import example_random
+from contestants import example_naiive
+from contestants import dedicated
 
 contestants = [
     ("Random", example_random.strategy, example_random.turn),
-    ("Random 2", example_random.strategy, example_random.turn),
     ("Naiive", example_naiive.strategy, example_naiive.turn),
+    ("The Dedicated Counter", dedicated.strategy, dedicated.turn),
 ]
 
 scores = [0] * len(contestants)
@@ -40,7 +41,7 @@ ordered_wins = sorted(zip(contestants, wins), key=lambda x: x[1], reverse=True)
 
 print("By score:")
 for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_score[i][0][0]} with {ordered_score[i][1]} wins")
+    print(f"{i + 1}: {ordered_score[i][0][0]} with {ordered_score[i][1]} points")
 
 print("\nBy wins:")
 for i in range(len(contestants)):
