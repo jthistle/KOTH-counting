@@ -121,10 +121,10 @@ def turn(current_value: int, *args) -> bool:
 ```
 
 `strategy` is called once at the beginning of each round. `last_results` is a list of previous results against the same opponent.
-Each item in the list is the result of a game in the form `(value reached, won)`, where `won` denotes whether the player
+Each item in the list is the result of a round in the form `(value reached, won)`, where `won` denotes whether the player
 won or not. If the player won through cooperation, this will be `True`.
 
-e.g.: if you lose your first round because your opponent stops counting at 79, `last_results` looks like `[(79, False)]` at the start of turn 2. If you then win turn 2 by stopping counting at 34, `last_results` will look like `[(79, False), (34, True)]` at the start of turn 3.
+e.g.: if you lose your first round because your opponent stops counting at 79, `last_results` looks like `[(79, False)]` at the start of round 2. If you then win round 2 by stopping counting at 34, `last_results` will look like `[(79, False), (34, True)]` at the start of round 3.
 
 `strategy` should return a tuple of static arguments that it wants to be passed to the `turn` function on each turn.
 
@@ -135,11 +135,34 @@ returned by the `strategy` function.
 
 (The reason that there are two separate functions is to try to speed up overall execution time, so bots don't analyze `last_results` every turn.) 
 
+## Example bot
+
+'Naiive' counts up to one before the number that was reached last round if it lost, otherwise it counts up to and including the number it won on.
+
+```py
+def strategy(last_games):
+    if len(last_games) == 0:
+        return 100,
+    
+    # Count up to one before the last number that was counted if we lost,
+    # otherwise just up to the last number that was counted.
+    # 
+    # What we return here will be used as the arguments for the `turn` function
+    if last_games[-1][1]:
+        return last_games[-1][0],
+    else:
+        return last_games[-1][0] - 1,
+
+def turn(current_value, up_to):
+    return current_value != up_to
+```
+
 # Rules
 
 - No cheating by interfering directly with your opponent (through global variables etc.).
 - Your function should be relatively quick to execute - the quicker it is, the better.
 - You *may* submit multiple entries.
+- Submissions close a week from the start of this post, at 2021-04-17 11:00 UTC
 
 # Controller, sandbox, arena
 
