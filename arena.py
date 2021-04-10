@@ -2,26 +2,29 @@
 
 from controller import Controller
 
-from contestants import example_random
-from contestants import example_naiive
-from contestants import dedicated
-from contestants import primitive
-from contestants import desperate
-from contestants import shortcut
+# Begin autogenerate
+from contestants import the_primitive_looker
+from contestants import hard_coded
+from contestants import low_blow
+from contestants import funnynumber
+from contestants import the_desperate_fighter
 from contestants import crab
-from contestants import funny_number
+from contestants import shortcut
+from contestants import the_dedicated_counter
 
-# Format: name, strategy function, (legacy only) turn function 
 contestants = [
-    ("Random", example_random.strategy),
-    ("Naiive", example_naiive.strategy),
-    ("The Dedicated Counter", dedicated.strategy, dedicated.turn),
-    ("The Primitive Looker", primitive.strategy, primitive.turn),
+    ("The primitive looker", the_primitive_looker.strategy, the_primitive_looker.turn),
+    ("Hard-coded", hard_coded.strategy),
+    ("Low Blow", low_blow.strategy),
+    ("FunnyNumber", funnynumber.strategy),
+    ("The Desperate Fighter", the_desperate_fighter.strategy, the_desperate_fighter.turn),
+    ("Crab", crab.strategy),
     ("Shortcut", shortcut.strategy, shortcut.turn),
-    ("Crab", crab.strategy, crab.turn),
-    ("Funny Number", funny_number.strategy),
-    ("The Desperate Fighter", desperate.strategy, desperate.turn),
+    ("The dedicated counter", the_dedicated_counter.strategy, the_dedicated_counter.turn),
 ]
+# End autogenerate
+
+# Contestants list has format: name, strategy function, (legacy only) turn function 
 
 scores = [0] * len(contestants)
 wins = [0] * len(contestants)

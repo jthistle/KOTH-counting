@@ -1,5 +1,3 @@
-# https://codegolf.stackexchange.com/a/223203/102975
-
 def strategy(last_results):
     return ()
 

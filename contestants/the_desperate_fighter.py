@@ -1,5 +1,3 @@
-# https://codegolf.stackexchange.com/a/223206/102975
-
 def strategy(last_results):
     if len(last_results) == 0:
       return True,
