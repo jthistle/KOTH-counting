@@ -1,3 +1,5 @@
+**Notice: I have changed the format of submissions for the challenge, to make it easier to understand. Existing submissions do not need to be updated—the controller supports the legacy format—but please make new submissions with the new, one-function format.**
+
 # Cooperative Counting - Python 3 KOTH
 
 Have you ever tried to count to 100 in an online forum or comment thread? It normally goes something like:
@@ -19,48 +21,26 @@ from going first, each player will count at the same time as the other.
 
 Your bot will be pitted against another bot. Your goal? Cooperatively count to 100.
 
-Each turn, your bot can do one of two things:
-
-- count the next number in the sequence
-- stop counting
+Each round, your bot decides how far it is willing to cooperatively count with its opponent.
 
 ## Possible outcomes
 
-**Both you and your opponent keep counting**
+**One person stops counting before the other**
 
-The current value of the sequence increases by one.
+The person who stopped counting first is awarded twice as many points as the value they counted up to. The other person gains no points.
 
-**One person stops counting, but the other keeps counting**
+**Both you and your opponent stop counting at the same time**
 
-The person who stopped counting is awarded twice as many points as the last value reached. The other
-person gains no points. The counting sequence is reset to 0.
+Neither of you gain any points.
 
-**Both you and your opponent stop counting**
+**Both you and your opponent count all the way to 100**
 
-Neither of you gain any points. The sequence resets to 0.
-
-**At 99, both you and your opponent keep counting**
-
-Each player gains 100 points. The sequence resets to 0.
+Each player gains 100 points.
 
 ## Example
 
-**Value: 1**
-
-- Player 1: keeps counting
-- Player 2: keeps counting
-
-**Value: 2**
-
-- Player 1: keeps counting
-- Player 2: keeps counting
-
-...
-
-**Value: 30**
-
-- Player 1: keeps counting
-- Player 2: stops counting
+- Player 1: decides to count to 80
+- Player 2: decides to count to 30
 
 Player 2 gets 60 points, player 1 gets 0 points.
 
@@ -68,12 +48,8 @@ Player 2 gets 60 points, player 1 gets 0 points.
 
 In another round:
 
-...
-
-**Value: 57**
-
-- Player 1: stops counting
-- Player 2: stops counting
+- Player 1: decides to count to 57
+- Player 2: decides to count to 57
 
 Neither player gets points.
 
@@ -81,12 +57,10 @@ Neither player gets points.
 
 In yet another round:
 
-...
-
 **Value: 99**
 
-- Player 1: keeps counting
-- Player 2: keeps counting
+- Player 1: decides to count to 100
+- Player 2: decides to count to 100
 
 Each player gets 100 points.
 
@@ -94,12 +68,6 @@ Each player gets 100 points.
 
 Your bot will be matched against other bots. It will play some number of rounds in a row, `n`, against the same bot.
 `n` will be somewhere in the range of 100 - 1000. This allows your bot to adapt to the other bot's strategy.
-
-**To clarify:**
-
-- one **game**, between two bots, is made up of multiple **rounds**
-- one **round** is made up of multiple **turns**. A round starts with the sequence at 1, and ends when a bot stops counting.
-- one **turn** is simply made up of each bot deciding whether to keep counting or not
 
 # Winning the KOTH
 
@@ -135,9 +103,9 @@ def strategy(last_games):
     # Count up to one before the last number that was counted if we lost,
     # otherwise just up to the last number that was counted.
     if last_games[-1][1]:
-        return last_games[-1][0],
+        return last_games[-1][0]
     else:
-        return last_games[-1][0] - 1,
+        return last_games[-1][0] - 1
 ```
 
 ## Legacy format (don't use)
