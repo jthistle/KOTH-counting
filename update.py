@@ -40,7 +40,9 @@ for a in answers:
     start = a["body"].index("<code>")
     finish = a["body"].index("</code>")
 
-    program = unescape(a["body"][start + 6:finish])
+    program = "# Author: {}\n".format(a["owner"]["display_name"])
+    program += "# https://codegolf.stackexchange.com/a/{num}\n\n".format(num=a["answer_id"])
+    program += unescape(a["body"][start + 6:finish])
 
     short_name = re.sub(r"[^a-z0-9]+", "_", name.lower())
 

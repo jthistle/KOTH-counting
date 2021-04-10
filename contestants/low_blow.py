@@ -1,3 +1,6 @@
+# Author: caird coinheringaahing
+# https://codegolf.stackexchange.com/a/223223
+
 def strategy(last_results):
         if len(last_results) <= 3:
                 return 99

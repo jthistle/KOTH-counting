@@ -1,3 +1,6 @@
+# Author: math
+# https://codegolf.stackexchange.com/a/223207
+
 def strategy(last_results):
     try:
         return (last_results, )

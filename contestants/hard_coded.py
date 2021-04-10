@@ -1,3 +1,6 @@
+# Author: Wasif
+# https://codegolf.stackexchange.com/a/223222
+
 import random
 def strategy(last_results):
   if len(last_results) == 0:
