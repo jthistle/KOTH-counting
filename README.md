@@ -25,9 +25,9 @@ Each round, your bot decides how far it is willing to cooperatively count with i
 
 ## Possible outcomes
 
-**One person stops counting before the other**
+**One player stops counting before the other**
 
-The person who stopped counting first is awarded twice as many points as the value they counted up to. The other person gains no points.
+The player who stopped counting first is awarded twice as many points as the value they counted up to. The other player gains no points.
 
 **Both you and your opponent stop counting at the same time**
 
@@ -56,8 +56,6 @@ Neither player gets points.
 -----
 
 In yet another round:
-
-**Value: 99**
 
 - Player 1: decides to count to 100
 - Player 2: decides to count to 100
