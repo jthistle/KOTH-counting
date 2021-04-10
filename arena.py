@@ -24,7 +24,7 @@ wins = [0] * len(contestants)
 N_GAMES = 1000
 
 for i in range(len(contestants)):
-    for j in range(len(contestants)):
+    for j in range(i):
         contestant = contestants[i]
         opponent = contestants[j]
         if contestant == opponent:
