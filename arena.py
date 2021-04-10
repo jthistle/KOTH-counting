@@ -8,6 +8,7 @@ from contestants import dedicated
 from contestants import primitive
 # from contestants import desperate
 from contestants import shortcut
+from contestants import crab
 
 contestants = [
     ("Random", example_random.strategy, example_random.turn),
@@ -15,6 +16,7 @@ contestants = [
     ("The Dedicated Counter", dedicated.strategy, dedicated.turn),
     ("The Primitive Looker", primitive.strategy, primitive.turn),
     ("Shortcut", shortcut.strategy, shortcut.turn),
+    ("Crab", crab.strategy, crab.turn),
     # ("The Desperate Fighter", desperate.strategy, desperate.turn),
 ]
 
@@ -51,4 +53,4 @@ for i in range(len(contestants)):
 
 print("\nBy wins:")
 for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_wins[i][0][0]} with {ordered_wins[i][1]} wins")
+    print(f"{i + 1}: {ordered_wins[i][0][0]} with {ordered_wins[i][1]} / {len(contestants) - 1} wins")
