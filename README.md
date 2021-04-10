@@ -110,30 +110,18 @@ Each bot will have a go against each other bot. Your bot can win in two categori
 
 # Technical details
 
-Write **two** functions in Python 3 with these signatures:
+
+Write **one** function in Python 3 with this signature:
 
 ```py
-def strategy(last_results: list[tuple[int, bool]]) -> tuple:
-    pass
-
-def turn(current_value: int, *args) -> bool:
-    pass
+def strategy(last_results: list[tuple[int, bool]]) -> int
 ```
 
-`strategy` is called once at the beginning of each round. `last_results` is a list of previous results against the same opponent.
-Each item in the list is the result of a round in the form `(value reached, won)`, where `won` denotes whether the player
+- `strategy` is called once at the beginning of each round. 
+  - `last_results` is a list of previous results against the same opponent. Each item in the list is the result of a round in the form `(value reached, won)`, where `won` denotes whether the player
 won or not. If the player won through cooperation, this will be `True`.
-
-e.g.: if you lose your first round because your opponent stops counting at 79, `last_results` looks like `[(79, False)]` at the start of round 2. If you then win round 2 by stopping counting at 34, `last_results` will look like `[(79, False), (34, True)]` at the start of round 3.
-
-`strategy` should return a tuple of static arguments that it wants to be passed to the `turn` function on each turn.
-
-`turn` is a function called every turn. It is passed `current_value`, the current value of the counted sequence, and the arguments
-returned by the `strategy` function.
-
-`turn` returns a bool: `True` to keep counting, `False` to stop counting.
-
-(The reason that there are two separate functions is to try to speed up overall execution time, so bots don't analyze `last_results` every turn.) 
+  - e.g.: if you lose your first round because your opponent stops counting at 79, `last_results` looks like `[(79, False)]` at the start of round 2. If you then win round 2 by stopping counting at 34, `last_results` will look like `[(79, False), (34, True)]` at the start of round 3.
+  - `strategy` should return the value at which the bot will stop counting. `1` stops counting immediately, `100` is an agreement to count cooperatively with the other bot all the way to the end, and e.g. `47` will stop counting when the value is `47`, earning the bot 84 points.
 
 ## Example bot
 
@@ -146,15 +134,23 @@ def strategy(last_games):
     
     # Count up to one before the last number that was counted if we lost,
     # otherwise just up to the last number that was counted.
-    # 
-    # What we return here will be used as the arguments for the `turn` function
     if last_games[-1][1]:
         return last_games[-1][0],
     else:
         return last_games[-1][0] - 1,
+```
 
-def turn(current_value, up_to):
-    return current_value != up_to
+## Legacy format (don't use)
+
+**I've decided on a simpler format since the last one was causing confusion. Here is the old one for reference purposes. New submissions should be in the new format. Submissions using the legacy format do not need to update their submission.**
+
+```py
+# Don't use this, see above
+def strategy(last_results: list[tuple[int, bool]]) -> tuple:
+    pass
+
+def turn(current_value: int, *args) -> bool:
+    pass
 ```
 
 # Rules

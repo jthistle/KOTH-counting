@@ -1,53 +1,57 @@
 
 class Controller:
     def __init__(self, funcs_1, funcs_2):
+        self.legacy = [len(x) == 2 for x in (funcs_1, funcs_2)]
         self.strategy = funcs_1[0], funcs_2[0]
-        self.turn = funcs_1[1], funcs_2[1]
+        self.turn = funcs_1[1] if self.legacy[0] else None, \
+                    funcs_2[1] if self.legacy[1] else None
 
         self.game_logs = [[], []]
         self.points = [0, 0]
 
     def new_game(self, debug=False):
-        self.current_value = 1
-
-        args = [self.strategy[i](self.game_logs[i]) for i in range(2)]
+        choices = [self.strategy[i](self.game_logs[i]) for i in range(2)]
 
         if debug:
-            print("Start game.")
+            print("Start round.")
 
-        for _ in range(99):
-            choices = [self.turn[i](self.current_value, *args[i]) for i in range(2)]
+        # Hack together legacy support
+        for i in range(2):
+            if not self.legacy[i]:
+                continue
 
-            if choices[0] and choices[1]:
-                if debug:
-                    print(f"{self.current_value}: both players keep counting.")
-                self.current_value += 1
-            elif not choices[0] and not choices[1]:
-                if debug:
-                    print(f"{self.current_value}: both players stop counting. No points.")
-                for x in self.game_logs:
-                    x.append((self.current_value, False))
-                break
-            else:
-                winner = 1 if choices[0] else 0
-                loser = 0 if choices[0] else 1
-                self.points[winner] += self.current_value * 2
-                
-                self.game_logs[winner].append((self.current_value, True))
-                self.game_logs[loser].append((self.current_value, False))
+            for j in range(1, 100):
+                if self.turn[i](j, *choices[i]) == False:
+                    choices[i] = j
+                    break
+            if type(choices[i]) is not int:
+                choices[i] = 100
 
-                if debug:
-                    print(f"{self.current_value}: player {winner + 1} stops counting, player {loser + 1} keeps counting. Player {winner + 1} gets {self.current_value * 2} points.")
-                break
-            
-        if self.current_value == 100:
+        # Work out who's won
+        if choices[0] == choices[1] == 100:
             if debug:
                 print(f"Players have mutually reached 100, and are awarded 100 points each.")
             self.points[0] += 100
             self.points[1] += 100
 
             for x in self.game_logs:
-                x.append((self.current_value, True))
+                x.append((100, True))
+        elif choices[0] == choices[1]:
+            if debug:
+                print(f"Both players stop counting at {choices[0]}. No points.")
+            for x in self.game_logs:
+                x.append((choices[0], False))
+        else:
+            winner = 1 if choices[0] > choices[1] else 0
+            loser = 0 if winner == 1 else 1
+            value = choices[winner]
+            self.points[winner] += value * 2
+            
+            self.game_logs[winner].append((value, True))
+            self.game_logs[loser].append((value, False))
+
+            if debug:
+                print(f"{value}: player {winner + 1} stops counting, player {loser + 1} keeps counting. Player {winner + 1} gets {value * 2} points.")
 
     def run(self, number_of_games, debug=False):
         no_debug = 0
