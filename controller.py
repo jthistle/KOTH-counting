@@ -30,6 +30,12 @@ class Controller:
 
         # Check for acceptable values
         for i in range(2):
+            try:
+                choices[i] = int(choices[i])
+            except ValueError:
+                name = f"Player {i + 1}" if self.names is None else self.names[i]
+                raise Exception(f"{name} gives non-numeric value {choices[i]}")
+
             if not 1 <= choices[i] <= 100:
                 name = f"Player {i + 1}" if self.names is None else self.names[i]
                 raise Exception(f"{name} gives unacceptable value {choices[i]}")
