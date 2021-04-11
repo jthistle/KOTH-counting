@@ -10,7 +10,10 @@ def strategy(last_results):
         if len(scores) > 420 and scores[:3] == [69, 68, 68]:
                 return 67
 
-        decrements = [50, 69]
+        if scores[:3] == [50, 49, 49] and not last_results[2][1]:
+                return sum(scores) // len(scores) - 1
+
+        decrements = [50, 69, 48]
 
         if all(score == 1 for score in scores): return 1
 

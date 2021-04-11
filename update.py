@@ -15,6 +15,12 @@ for f in os.listdir("contestants"):
     if not os.path.isdir("contestants/" + f):
         os.remove("contestants/" + f)
 
+
+BLACKLIST = [
+    223241, # Hawk, until Py code is put first and it doesn't break controller
+    223247, # Copycat, until usage of only one strat per tournament is confirmed
+]
+
 has_more = True
 answers = []
 while has_more:
@@ -34,6 +40,9 @@ arena_list = []
 for a in answers:
     if a["body"][:4] != "<h1>" and a["body"][:4] != "<h2>":
         raise "namen't"
+
+    if int(a["answer_id"]) in BLACKLIST:
+        continue
 
     name = a["body"][4:a["body"].index("</h" + a["body"][2] + ">")]
 
