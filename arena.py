@@ -6,6 +6,7 @@ from example_contestants import naiive
 from example_contestants import random
 
 # Begin autogenerate
+from contestants import hawk
 from contestants import low_blow
 from contestants import zoidberg
 from contestants import simple_killer
@@ -18,6 +19,7 @@ from contestants import shortcut
 from contestants import the_dedicated_counter
 
 contestants = [
+    ("Hawk", hawk.strategy),
     ("Low Blow", low_blow.strategy),
     ("Zoidberg", zoidberg.strategy),
     ("Simple Killer", simple_killer.strategy),

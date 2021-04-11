@@ -17,7 +17,6 @@ for f in os.listdir("contestants"):
 
 
 BLACKLIST = [
-    223241, # Hawk, until Py code is put first and it doesn't break controller
     223247, # Copycat, until usage of only one strat per tournament is confirmed
 ]
 
