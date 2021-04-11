@@ -64,16 +64,41 @@ for i in range(len(contestants)):
 
 ordered_score = sorted(zip(contestants, scores), key=lambda x: x[1], reverse=True)
 ordered_wins = sorted(zip(contestants, wins), key=lambda x: x[1], reverse=True)
-ordered_all = sorted(contestants, key=lambda x: [y[0] for y in ordered_score].index(x) + [y[0] for y in ordered_wins].index(x))
+
+overall = {}
+
+
+def joint_rank(sorted_list, key):
+    last = -1
+    rank = 0
+    buffer = 0
+    out = []
+    for item in sorted_list:
+        score = key(item)
+        if score != last:
+            rank += buffer + 1
+            buffer = 0
+        else:
+            buffer += 1
+        out.append((item, rank))
+        last = score
+
+    return out
+
 
 print("By score:")
-for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_score[i][0][0]} with {ordered_score[i][1]} points")
+for (contestant, points), rank in joint_rank(ordered_score, key=lambda x: x[1]):
+    print(f"{rank}: {contestant[0]} with {points} points")
+    overall[contestant] = rank
 
 print("\nBy wins:")
-for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_wins[i][0][0]} with {ordered_wins[i][1]}/{len(contestants) - 1} wins")
+for (contestant, wins), rank in joint_rank(ordered_wins, key=lambda x: x[1]):
+    print(f"{rank}: {contestant[0]} with {wins}/{len(contestants) - 1} wins")
+    overall[contestant] += rank
 
-print("\nCombined leaderboard:")
-for i in range(len(contestants)):
-    print(f"{i + 1}: {ordered_all[i][0]}")
+# Calculate combined
+ordered_overall = [(c, overall[c]) for c in sorted(overall.keys(), key=lambda x: overall[x])]
+
+print("\nCombined leaderboard (fewer pts = better):")
+for (contestant, score), rank in joint_rank(ordered_overall, key=lambda x: x[1]):
+    print(f"{rank}: {contestant[0]}  ({score} pts)")
