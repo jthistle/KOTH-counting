@@ -28,6 +28,9 @@ def strategy(last_results):
         if len(scores) == 1 and scores[0] < 48:
                 return scores[0]
 
+        if last_results[:2] == [(99, True), (99, False)]:
+                return max(scores[-1] - 1, 1)
+
         if scores[:2] == [50, 33]    : return max(min(50, int(sum(scores) / (len(scores) * 1.5))) - 1, 1)
         if scores[:2] == [99, 97]    : return max(scores[-1] - 3, 1)
         if scores[:2] == [99, 98]    : return max(scores[-1] - 2, 1)

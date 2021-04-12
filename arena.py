@@ -6,13 +6,14 @@ from example_contestants import naiive
 from example_contestants import random
 
 # Begin autogenerate
-from contestants import low_blow
 from contestants import meandian
+from contestants import tit_for_tat
+from contestants import low_blow
+from contestants import simple_killer
 from contestants import hard_coded
 from contestants import the_primitive_looker
 from contestants import hawk
 from contestants import zoidberg
-from contestants import simple_killer
 from contestants import funnynumber
 from contestants import the_desperate_fighter
 from contestants import crab
@@ -20,13 +21,14 @@ from contestants import shortcut
 from contestants import the_dedicated_counter
 
 contestants = [
-    ("Low Blow", low_blow.strategy),
     ("Meandian", meandian.strategy),
+    ("Tit for tat", tit_for_tat.strategy),
+    ("Low Blow", low_blow.strategy),
+    ("Simple Killer", simple_killer.strategy),
     ("Hard-coded", hard_coded.strategy),
     ("The primitive looker", the_primitive_looker.strategy, the_primitive_looker.turn),
     ("Hawk", hawk.strategy),
     ("Zoidberg", zoidberg.strategy),
-    ("Simple Killer", simple_killer.strategy),
     ("FunnyNumber", funnynumber.strategy),
     ("The Desperate Fighter", the_desperate_fighter.strategy, the_desperate_fighter.turn),
     ("Crab", crab.strategy),
