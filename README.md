@@ -1,5 +1,3 @@
-**Notice: I have changed the format of submissions for the challenge, to make it easier to understand. Existing submissions do not need to be updated—the controller supports the legacy format—but please make new submissions with the new, one-function format.**
-
 # Cooperative Counting - Python 3 KOTH
 
 Have you ever tried to count to 100 in an online forum or comment thread? It normally goes something like:
@@ -69,15 +67,16 @@ Your bot will be matched against other bots. It will play some number of rounds 
 
 # Winning the KOTH
 
-Each bot will have a go against each other bot. Your bot can win in two categories:
+Each bot will have a go against each other bot. Your bot can win in three categories:
 
 - **Score:** the total scores will be summed and the bot with the most points at the end will win.
 - **Wins:** a 'win' is counted for the bot with the highest score after the `n` rounds have been played.
+- **Overall:** both the other categories combined
 
 # Technical details
 
 
-Write **one** function in Python 3 with this signature:
+Write a function in Python 3 with this signature:
 
 ```py
 def strategy(last_results: list[tuple[int, bool]]) -> int
@@ -96,14 +95,14 @@ won or not. If the player won through cooperation, this will be `True`.
 ```py
 def strategy(last_games):
     if len(last_games) == 0:
-        return 100,
+        return 100
     
     # Count up to one before the last number that was counted if we lost,
     # otherwise just up to the last number that was counted.
     if last_games[-1][1]:
         return last_games[-1][0]
     else:
-        return last_games[-1][0] - 1
+        return max(1, last_games[-1][0] - 1)
 ```
 
 ## Legacy format (don't use)
