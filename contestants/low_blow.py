@@ -25,16 +25,23 @@ def strategy(last_results):
                 if scores[-1] == 1: return 1
                 return random.randint(1, 48)
 
+        if scores == [98]:
+                return 97
+
         if len(scores) == 1 and scores[0] < 48:
                 return scores[0]
 
         if last_results[:2] == [(99, True), (99, False)]:
                 return max(scores[-1] - 1, 1)
 
-        if scores[:2] == [50, 33]    : return max(min(50, int(sum(scores) / (len(scores) * 1.5))) - 1, 1)
+        if scores[:2] == [47, 31]    : return max(min(50, int(sum(scores) / (len(scores) * 1.5))) - 1, 1)
         if scores[:2] == [99, 97]    : return max(scores[-1] - 3, 1)
         if scores[:2] == [99, 98]    : return max(scores[-1] - 2, 1)
         if scores[:3] == [99, 99, 98]: return max(scores[-1] - 1, 1)
+
+        if scores[:2] == [98, 97]    :
+                htl_losses = [result[0] for result in last_results if result[1]]
+                return max(min(htl_losses) - len(htl_losses) - 2, 1)
 
         if len(scores) > 1 and scores[0] == scores[1] != 99:
                 mean = round(statistics.mean(scores))
@@ -43,6 +50,9 @@ def strategy(last_results):
                 if mean == median:
                         return max(mean - 1, 1)
                 return max(abs(median - mean) - 1, 1)
+
+        if scores[-1] == 1:
+                return 1
 
         if len(scores) <= 3: return 99
 
