@@ -6,6 +6,8 @@ from example_contestants import naiive
 from example_contestants import random
 
 # Begin autogenerate
+from contestants import the_diff_predictor
+from contestants import follow
 from contestants import hawk
 from contestants import low_blow
 from contestants import naughty_or_nice_
@@ -24,6 +26,8 @@ from contestants import shortcut
 from contestants import the_dedicated_counter
 
 contestants = [
+    ("The diff predictor", the_diff_predictor.strategy),
+    ("Follow", follow.strategy),
     ("Hawk", hawk.strategy),
     ("Low Blow", low_blow.strategy),
     ("Naughty or Nice?", naughty_or_nice_.strategy),
