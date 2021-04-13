@@ -54,7 +54,7 @@ scores = [0] * len(contestants)
 wins = [0] * len(contestants)
 
 N_GAMES = 1000
-N_RUNS = 5
+N_RUNS = 10
 
 for run in range(N_RUNS):
     print(f"Run no. {run + 1}")
